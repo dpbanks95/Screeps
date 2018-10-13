@@ -24,7 +24,7 @@ var roleFred = {
                 creep.memory.north = false;
                 creep.memory.east = false;
                 Memory.fredLaps++;
-                creep.say(Memory.fredLaps + ' Laps 🏁 ', true);
+                creep.say(Memory.fredLaps + " Laps 🏁", true);
             }
         }
     }
