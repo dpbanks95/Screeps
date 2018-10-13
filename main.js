@@ -1,10 +1,21 @@
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder'); 
+var roleFred = require('role.fred'); 
 var autoSpawn = require('autospawn');
 var cleanup = require('cleanup');
 
-module.exports.loop = function () { 
+/**
+ * To Do -
+ * - Harvesters Fill storage boxes and other creep types feed from them
+ * - Harvesters go to source with free tiles rather than source being hard coded
+ * - Build lots-o roads
+ * - Create refiller role that refills spawn instead of harvesters
+ **/
+ 
+module.exports.loop = function () {
+    Memory.lineOpacity = 0.5;
+    
     console.log('------------------------------------------------------');
     //Clear non existing creeps from memory
     for(var name in Memory.creeps) {
@@ -23,11 +34,14 @@ module.exports.loop = function () {
         size = 'medium';
     }
     
+    var harvMax = 6;
+    
     //Auto spawn creeps
     if(!Memory.cleanup){
-        autoSpawn.run(4, 'harvester', size);
+        autoSpawn.run(harvMax, 'harvester', size);
         autoSpawn.run(2, 'upgrader', size);
         autoSpawn.run(3, 'builder', size);
+        autoSpawn.run(1, 'fred', 'speedyBoi');
     }
     
     //Remove excess creeps with "Memory.cleanup = true;" in console
@@ -40,16 +54,21 @@ module.exports.loop = function () {
     }
     
     //Handle creep movement
+    var harvCount = 0;
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
         if(creep.memory.role == 'harvester') {
-            roleHarvester.run(creep);
+            harvCount++;
+            roleHarvester.run(creep, harvMax, harvCount);
         }
         if(creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);
         }
         if(creep.memory.role == 'builder') {
             roleBuilder.run(creep);
+        }
+        if(creep.memory.role == 'fred') {
+            roleFred.run(creep);
         }
     }
 }

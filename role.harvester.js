@@ -1,11 +1,22 @@
 var roleHarvester = {
 
-    /** @param {Creep} creep **/ 
-    run: function(creep) {
+    /**
+    * @param {Creep} creep 
+    * @param {int} harvMax Max number of Harvester creeps
+    * @param {int} harvCount Current harvester creep count
+    **/ 
+    run: function(creep, harvMax, harvCount) {
 	    if(creep.carry.energy < creep.carryCapacity) {
-            if(creep.harvest(Game.getObjectById('5bbcac6f9099fc012e635718')) == ERR_NOT_IN_RANGE){
-                creep.moveTo(Game.flags['Source1'].pos, {visualizePathStyle: {stroke: '#ffaa00'}});
-            }
+	        if(harvCount >= harvMax/2){
+	            if(creep.harvest(Game.getObjectById('5bbcac6f9099fc012e635718')) == ERR_NOT_IN_RANGE){
+                    creep.moveTo(Game.flags['Source1'].pos, {visualizePathStyle: {stroke: '#029e00', opacity: Memory.lineOpacity}});
+                }
+	        }else{
+	            if(creep.harvest(Game.getObjectById('5bbcac6f9099fc012e635719')) == ERR_NOT_IN_RANGE){
+                    creep.moveTo(Game.flags['Source2'].pos, {visualizePathStyle: {stroke: '#029e00', opacity: Memory.lineOpacity}});
+                }
+	        }
+            
         } 
         else {
             var targets = creep.room.find(FIND_STRUCTURES, {
@@ -17,6 +28,7 @@ var roleHarvester = {
                     }
                 });
             
+            //Fill containers if no other important structures to fill
             if(targets.length == 0){
                 targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
@@ -26,12 +38,11 @@ var roleHarvester = {
                 });
             }
             
-            
             if(targets.length > 0) {
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#029e00', opacity: 1}});
                 }else{
-                    creep.moveTo(Game.spawns['Spawn1'], {visualizePathStyle: {stroke: '#ffffff'}});
+                    creep.moveTo(Game.spawns['Spawn1'], {visualizePathStyle: {stroke: '#029e00', opacity: Memory.lineOpacity}});
                 }
             }
         }

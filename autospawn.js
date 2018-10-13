@@ -40,6 +40,12 @@ var autoSpawn = {
                         Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,CARRY,MOVE,MOVE], newName, {memory:{role:type,scale:size}});
                     }
                    break;
+                case "speedyBoi":
+                        Game.spawns['Spawn1'].spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], 'fred', {memory:{role:type,scale:size}});
+                        Game.creeps['fred'].memory.west = false;
+                        Game.creeps['fred'].memory.north = false;
+                        Game.creeps['fred'].memory.east = false;
+                   break;
             
                default: 
                    console.log('Invalid size: ' + size);
