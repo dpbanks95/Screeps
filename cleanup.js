@@ -19,12 +19,12 @@ var cleanup = {
         if(currentCreeps.length > maxCreeps){
             while(currentCreeps.length > maxCreeps){
                 var creepsToKill = currentCreeps.length-maxCreeps;
-                console.log('Killing ' + creepsToKill + ' ' + size + ' ' + type + ' Creeps 👌');
+                console.log('Killing ' + creepsToKill + ' ' + size + ' ' + type + ' Creeps');
                 Game.creeps[currentCreeps[0].name].suicide();
                 currentCreeps.pop();
             }
         }else{
-            console.log('No ' + size + ' ' + type + ' Creeps to kill 😞');
+            console.log('No ' + size + ' ' + type + ' Creeps to kill');
         }
 	}
 };
