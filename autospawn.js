@@ -8,7 +8,7 @@ var autoSpawn = {
     */
     run: function(maxSpawn, type, size) { 
         var count = _.filter(Game.creeps, (creep) => creep.memory.role == type && creep.memory.scale == size).length;
-        console.log(type + 's: ' + count + '/' + maxSpawn);
+        console.log(size + ' ' + type + 's: ' + count + '/' + maxSpawn);
         
         var newName = type + Game.time;
         

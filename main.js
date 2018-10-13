@@ -14,19 +14,27 @@ module.exports.loop = function () {
         }
     }
     
+    var maxEnergy = Game.spawns['Spawn1'].room.energyCapacityAvailable;
+    var size = 'small';
+    if(maxEnergy >= 700){
+        size = 'large';
+    }else if(maxEnergy >= 450){
+        size = 'medium';
+    }
+    
     //Auto spawn creeps
     if(!Memory.cleanup){
-        autoSpawn.run(3, 'harvester', 'small');
-        autoSpawn.run(2, 'upgrader', 'small');
-        autoSpawn.run(3, 'builder', 'small');
+        autoSpawn.run(5, 'harvester', size);
+        autoSpawn.run(5, 'upgrader', size);
+        autoSpawn.run(5, 'builder', size);
     }
     
     //Remove excess creeps with "Memory.cleanup = true;" in console
     if(Memory.cleanup){
         console.log('IN CLEANUP MODE');
-        cleanup.run(3, 'harvester', 'small');
-        cleanup.run(3, 'upgrader', 'small');
-        cleanup.run(3, 'builder', 'small');
+        cleanup.run(5, 'harvester', 'small');
+        cleanup.run(5, 'upgrader', 'small');
+        cleanup.run(5, 'builder', 'small');
         Memory.cleanup = false;
     }
     
