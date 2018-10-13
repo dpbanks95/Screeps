@@ -7,7 +7,7 @@ var autoSpawn = {
     * @param {String} size Size of creep (small, medium or large)
     */
     run: function(maxSpawn, type, size) { 
-        var count = _.filter(Game.creeps, (creep) => creep.memory.role == type && creep.memory.scale == size).length;
+        var count = _.filter(Game.creeps, (creep) => creep.memory.role == type).length;
         console.log(size + ' ' + type + 's: ' + count + '/' + maxSpawn);
         
         var newName = type + Game.time;
@@ -34,10 +34,10 @@ var autoSpawn = {
                    break;
                    
                case "large":
-                   if(maxEnergy < 700){
-                        console.log('Need 700 energy to spawn: ' + size + ' ' + type);
+                   if(maxEnergy < 550){
+                        console.log('Need 550 energy to spawn: ' + size + ' ' + type);
                     }else{
-                        Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,WORK,CARRY,MOVE,MOVE,MOVE], newName, {memory:{role:type,scale:size}});
+                        Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,CARRY,MOVE,MOVE], newName, {memory:{role:type,scale:size}});
                     }
                    break;
             

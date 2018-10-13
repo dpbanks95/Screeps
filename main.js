@@ -5,7 +5,7 @@ var autoSpawn = require('autospawn');
 var cleanup = require('cleanup');
 
 module.exports.loop = function () { 
-
+    console.log('------------------------------------------------------');
     //Clear non existing creeps from memory
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
@@ -16,25 +16,26 @@ module.exports.loop = function () {
     
     var maxEnergy = Game.spawns['Spawn1'].room.energyCapacityAvailable;
     var size = 'small';
-    if(maxEnergy >= 700){
-        size = 'large';
-    }else if(maxEnergy >= 450){
+    if(maxEnergy >= 550){
+        //size = 'large';
+    }
+    if(maxEnergy >= 450){
         size = 'medium';
     }
     
     //Auto spawn creeps
     if(!Memory.cleanup){
-        autoSpawn.run(5, 'harvester', size);
-        autoSpawn.run(5, 'upgrader', size);
-        autoSpawn.run(5, 'builder', size);
+        autoSpawn.run(4, 'harvester', size);
+        autoSpawn.run(2, 'upgrader', size);
+        autoSpawn.run(3, 'builder', size);
     }
     
     //Remove excess creeps with "Memory.cleanup = true;" in console
     if(Memory.cleanup){
         console.log('IN CLEANUP MODE');
-        cleanup.run(5, 'harvester', 'small');
-        cleanup.run(5, 'upgrader', 'small');
-        cleanup.run(5, 'builder', 'small');
+        cleanup.run(4, 'harvester', 'small');
+        cleanup.run(2, 'upgrader', 'small');
+        cleanup.run(3, 'builder', 'small');
         Memory.cleanup = false;
     }
     
