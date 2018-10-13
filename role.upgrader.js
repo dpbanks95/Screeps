@@ -5,11 +5,11 @@ var roleUpgrader = {
 
         if(creep.memory.upgrading && creep.carry.energy == 0) {
             creep.memory.upgrading = false;
-            creep.say('harvest');
+            creep.say('harvesting');
 	    }
 	    if(!creep.memory.upgrading && creep.carry.energy == creep.carryCapacity) {
 	        creep.memory.upgrading = true;
-	        creep.say('upgrade');
+	        creep.say('upgradeing');
 	    }
 
 	    if(creep.memory.upgrading) {
@@ -18,8 +18,8 @@ var roleUpgrader = {
             }
         }
         else {
-            if(creep.harvest(Game.getObjectById('5bbcac6f9099fc012e635718')) == ERR_NOT_IN_RANGE){
-                creep.moveTo(Game.flags['Source1'].pos, {visualizePathStyle: {stroke: '#ffaa00'}});
+            if(creep.harvest(Game.getObjectById('5bbcac6f9099fc012e635719')) == ERR_NOT_IN_RANGE){
+                creep.moveTo(Game.flags['Source2'].pos, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
 	}

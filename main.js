@@ -17,7 +17,7 @@ module.exports.loop = function () {
     //Auto spawn creeps
     if(!Memory.cleanup){
         autoSpawn.run(3, 'harvester', 'small');
-        autoSpawn.run(3, 'upgrader', 'small');
+        autoSpawn.run(2, 'upgrader', 'small');
         autoSpawn.run(3, 'builder', 'small');
     }
     
