@@ -1,3 +1,5 @@
+var roleHarvester = require('role.harvester');
+
 var roleBuilder = {
 
     /** @param {Creep} creep **/
@@ -11,10 +13,11 @@ var roleBuilder = {
 	        creep.memory.building = true;
 	        creep.say('building');
 	    }
-
-	    if(creep.memory.building) {
+	    
+	    if(creep.memory.building || creep.memory.actingAsHarv) {
 	        var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
             if(targets.length) {
+                creep.memory.actingAsHarv = false;
                 if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#9e0000', opacity: Memory.lineOpacity}});
                 }
@@ -24,16 +27,21 @@ var roleBuilder = {
                 });
                 
                 if (closestDamagedStructure){
+                    creep.memory.actingAsHarv = false;
                     if(creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(closestDamagedStructure, {visualizePathStyle: {stroke: '#9e0000', opacity: Memory.lineOpacity}});
                     }
+                }else{
+                    //If nothing else to do then act as a harvester
+                    roleHarvester.run(creep, 1, 1);
+                    creep.memory.actingAsHarv = true;
                 }
             }
-	    }else {
+	    }else if(!creep.memory.actingAsHarv){
 	        var sources = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return structure.structureType == STRUCTURE_CONTAINER &&
-                            _.sum(structure.store) > creep.carryCapacity;
+                            _.sum(structure.store) >= creep.carryCapacity;
                     }
                 });
             if(sources.length > 0){

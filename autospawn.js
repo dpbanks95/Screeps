@@ -29,19 +29,19 @@ var autoSpawn = {
                    if(maxEnergy < 450){
                         console.log('Need 450 energy to spawn: ' + size + ' ' + type);
                     }else{
-                        Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,CARRY,MOVE,MOVE], newName, {memory:{role:type,scale:size}});
+                        Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE], newName, {memory:{role:type,scale:size}});
                     }
                    break;
                    
                case "large":
-                   if(maxEnergy < 550){
-                        console.log('Need 550 energy to spawn: ' + size + ' ' + type);
+                   if(maxEnergy < 500){
+                        console.log('Need 500 energy to spawn: ' + size + ' ' + type);
                     }else{
-                        Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,CARRY,MOVE,MOVE], newName, {memory:{role:type,scale:size}});
+                        Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], newName, {memory:{role:type,scale:size}});
                     }
                    break;
                 case "speedyBoi":
-                        Game.spawns['Spawn1'].spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], 'fred', {memory:{role:type,scale:size}});
+                        Game.spawns['Spawn1'].spawnCreep([MOVE], 'fred', {memory:{role:type,scale:size}});
                         if(Game.creeps['fred']){
                             Game.creeps['fred'].memory.west = false;
                             Game.creeps['fred'].memory.north = false;
