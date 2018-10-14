@@ -1,6 +1,9 @@
 var roleFred = {
  
-    /** @param {Creep} creep **/
+    /** 
+    * Fred just keeps going
+    * 
+    * @param {Creep} creep **/
     run: function(creep) {
         if(!creep.memory.west){
             creep.moveTo(32, 27);

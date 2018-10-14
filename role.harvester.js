@@ -17,7 +17,7 @@ var roleHarvester = {
 	        creep.say('depositing');
 	    }
 	    if(!creep.memory.harvesting) {
-	        if(harvCount >= harvMax/2){
+	        if(harvCount > harvMax/2){
 	            if(creep.harvest(Game.getObjectById('5bbcac6f9099fc012e635718')) == ERR_NOT_IN_RANGE){
                     creep.moveTo(Game.flags['Source1'].pos, {visualizePathStyle: {stroke: '#029e00', opacity: Memory.lineOpacity}});
                 }

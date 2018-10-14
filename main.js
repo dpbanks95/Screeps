@@ -7,6 +7,8 @@ var autoSpawn = require('autospawn');
 var cleanup = require('cleanup');
 
 /**
+ * SHARD 3 / ROOM W8N29
+ * 
  * To Do -
  * - Build lots-o roads
  **/
@@ -28,7 +30,7 @@ module.exports.loop = function () {
     console.log('Available Energy: ' + availableEnergy);
     
     var size = 'small';
-    if(maxEnergy >= 500){
+    if(maxEnergy >= 600){
         //size = 'large';
     }
     if(maxEnergy >= 450){
@@ -36,9 +38,9 @@ module.exports.loop = function () {
     }
     
     var harvMax = 4;
-    var upgMax = 4;
+    var upgMax = 5;
     var buildMax = 2;
-    var refilMax = 2;
+    var refilMax = 3;
     Memory.actingHarv = harvMax;
     
     //Auto spawn creeps

@@ -1,6 +1,9 @@
 var roleUpgrader = {
  
-    /** @param {Creep} creep **/
+    /** 
+    * Creep for upgrading room controller
+    * 
+    * @param {Creep} creep **/
     run: function(creep) {
 
         if(creep.memory.upgrading && creep.carry.energy == 0) {

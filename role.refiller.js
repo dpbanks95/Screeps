@@ -2,7 +2,11 @@ var roleHarvester = require('role.harvester');
 
 var roleRefiller = {
  
-    /** @param {Creep} creep **/
+    /** 
+    * Creep for refilling energy on Spawner + extensions,
+    * will act as harvester when nothing to build
+    * 
+    * @param {Creep} creep **/
     run: function(creep) {
         //Doing job and empty
         if(creep.memory.refilling && creep.carry.energy == 0) {

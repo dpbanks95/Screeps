@@ -2,7 +2,11 @@ var roleHarvester = require('role.harvester');
 
 var roleBuilder = {
 
-    /** @param {Creep} creep **/
+    /** 
+    * Creep for building construction sites,
+    * will act as harvester when nothing to build
+    * 
+    * @param {Creep} creep **/
     run: function(creep) { 
 
 	    if(creep.memory.building && creep.carry.energy == 0) {
@@ -33,7 +37,7 @@ var roleBuilder = {
                     }
                 }else{
                     //If nothing else to do then act as a harvester
-                    roleHarvester.run(creep, 4, 1);
+                    roleHarvester.run(creep, 1, 4);
                     Memory.actingHarv++;
                     creep.memory.actingAsHarv = true;
                 }
