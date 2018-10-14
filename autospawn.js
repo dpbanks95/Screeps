@@ -42,9 +42,11 @@ var autoSpawn = {
                    break;
                 case "speedyBoi":
                         Game.spawns['Spawn1'].spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], 'fred', {memory:{role:type,scale:size}});
-                        Game.creeps['fred'].memory.west = false;
-                        Game.creeps['fred'].memory.north = false;
-                        Game.creeps['fred'].memory.east = false;
+                        if(Game.creeps['fred']){
+                            Game.creeps['fred'].memory.west = false;
+                            Game.creeps['fred'].memory.north = false;
+                            Game.creeps['fred'].memory.east = false;
+                        }
                    break;
             
                default: 

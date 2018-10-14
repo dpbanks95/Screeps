@@ -35,12 +35,20 @@ module.exports.loop = function () {
     }
     
     var harvMax = 6;
+    var upgMax = 2;
+    var buildMax = 3;
+    
+    if(maxEnergy == 550){
+        harvMax = 6;
+        upgMax = 5;
+        buildMax = 1;
+    }
     
     //Auto spawn creeps
     if(!Memory.cleanup){
         autoSpawn.run(harvMax, 'harvester', size);
-        autoSpawn.run(2, 'upgrader', size);
-        autoSpawn.run(3, 'builder', size);
+        autoSpawn.run(upgMax, 'upgrader', size);
+        autoSpawn.run(buildMax, 'builder', size);
         autoSpawn.run(1, 'fred', 'speedyBoi');
     }
     

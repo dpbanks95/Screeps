@@ -18,6 +18,16 @@ var roleBuilder = {
                 if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#9e0000', opacity: Memory.lineOpacity}});
                 }
+            }else{
+                var closestDamagedStructure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: function(object){ return object.hits < object.hitsMax;}
+                });
+                
+                if (closestDamagedStructure){
+                    if(creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(closestDamagedStructure, {visualizePathStyle: {stroke: '#9e0000', opacity: Memory.lineOpacity}});
+                    }
+                }
             }
 	    }else {
 	        var sources = creep.room.find(FIND_STRUCTURES, {
