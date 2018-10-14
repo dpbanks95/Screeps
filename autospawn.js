@@ -2,9 +2,9 @@ var autoSpawn = {
     /**
     * Auto spawn creeps of given type and size
     * 
-    * @param {int} maxCreeps Max number to spawn
-    * @param {String} type Type of creep (harvester, upgrader or builder)
-    * @param {String} size Size of creep (small, medium or large)
+    * @param {number} maxCreeps - Max number to spawn
+    * @param {String} type - Type of creep (harvester, upgrader or builder)
+    * @param {String} size - Size of creep (small, medium or large)
     */
     run: function(maxSpawn, type, size) { 
         var count = _.filter(Game.creeps, (creep) => creep.memory.role == type).length;

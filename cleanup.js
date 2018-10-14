@@ -2,9 +2,9 @@ var cleanup = {
     /**
     * Clean up creeps so that there are only maxCreeps left
     * 
-    * @param {int} maxCreeps Max number of creeps there should be
-    * @param {String} type Type of creep (harvester, upgrader or builder)
-    * @param {String} size Size of creep (small, medium or large)
+    * @param {number} maxCreeps - Max number of creeps there should be
+    * @param {String} type - Type of creep (harvester, upgrader or builder)
+    * @param {String} size - Size of creep (small, medium or large)
     */
     run: function(maxCreeps, type, size) { 
         var count = _.filter(Game.creeps, (creep) => creep.memory.role == type && creep.memory.scale == size).length;

@@ -4,8 +4,8 @@ var roleHarvester = {
     * harvCount >= harvMax/2 used for selecting source
     * 
     * @param {Creep} creep 
-    * @param {int} harvMax Max number of Harvester creeps
-    * @param {int} harvCount Current harvester creep count
+    * @param {number} harvMax - Max number of Harvester creeps
+    * @param {number} harvCount - Current harvester creep count
     **/ 
     run: function(creep, harvMax, harvCount) {
         if(creep.memory.harvesting && creep.carry.energy == 0) {
