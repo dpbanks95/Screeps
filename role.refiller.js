@@ -4,17 +4,18 @@ var roleRefiller = {
  
     /** @param {Creep} creep **/
     run: function(creep) {
-
+        //Doing job and empty
         if(creep.memory.refilling && creep.carry.energy == 0) {
             creep.memory.refilling = false;
             creep.say('harvesting');
 	    }
+	    //Not doing job and full
 	    if(!creep.memory.refilling && creep.carry.energy == creep.carryCapacity) {
 	        creep.memory.refilling = true;
 	        creep.say('refilling');
 	    }
 
-	    if(creep.memory.refilling) {
+	    if(creep.memory.refilling || creep.memory.actingAsHarv) {
             var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||
@@ -23,24 +24,17 @@ var roleRefiller = {
                             structure.energy < structure.energyCapacity;
                     }
                 });
-            //Fill containers if no other important structures to fill
-            if(targets.length == 0){
-                targets = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return structure.structureType == STRUCTURE_CONTAINER &&
-                            _.sum(structure.store) < structure.storeCapacity;
-                    }
-                });
-            }
             
-            if(targets.length > 0) {
+            if(targets.length) {
+                creep.memory.actingAsHarv = false;
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#e5dd00', opacity: 1}});
-                }else{
-                    //If nothing else to do then act as a harvester
-                    //roleHarvester.run(creep, 1, 1);
-                    //creep.memory.actingAsHarv = true;
                 }
+            }else{
+                //If nothing else to do then act as a harvester
+                roleHarvester.run(creep, 4, 1);
+                Memory.actingHarv++;
+                creep.memory.actingAsHarv = true;
             }
         }
         else {

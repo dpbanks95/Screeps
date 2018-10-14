@@ -9,7 +9,6 @@ var cleanup = require('cleanup');
 /**
  * To Do -
  * - Build lots-o roads
- * - Create refiller role that refills spawn instead of harvesters
  **/
  
 module.exports.loop = function () {
@@ -38,8 +37,9 @@ module.exports.loop = function () {
     
     var harvMax = 4;
     var upgMax = 4;
-    var buildMax = 1;
-    var refilMax = 1;
+    var buildMax = 2;
+    var refilMax = 2;
+    Memory.actingHarv = harvMax;
     
     //Auto spawn creeps
     if(!Memory.cleanup){
@@ -81,4 +81,5 @@ module.exports.loop = function () {
             roleFred.run(creep);
         }
     }
+    console.log('Acting Harvesters: ' + Memory.actingHarv);
 }

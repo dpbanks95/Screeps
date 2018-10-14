@@ -33,7 +33,8 @@ var roleBuilder = {
                     }
                 }else{
                     //If nothing else to do then act as a harvester
-                    roleHarvester.run(creep, 1, 1);
+                    roleHarvester.run(creep, 4, 1);
+                    Memory.actingHarv++;
                     creep.memory.actingAsHarv = true;
                 }
             }

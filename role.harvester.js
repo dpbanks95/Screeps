@@ -1,6 +1,8 @@
 var roleHarvester = {
 
     /**
+    * harvCount >= harvMax/2 used for selecting source
+    * 
     * @param {Creep} creep 
     * @param {int} harvMax Max number of Harvester creeps
     * @param {int} harvCount Current harvester creep count
@@ -28,29 +30,15 @@ var roleHarvester = {
         } 
         else {
             var targets = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_EXTENSION ||
-                        structure.structureType == STRUCTURE_SPAWN ||
-                        structure.structureType == STRUCTURE_TOWER) &&
-                            structure.energy < structure.energyCapacity;
-                    }
-                });
-            
-            //Fill containers if no other important structures to fill
-            if(targets.length == 0){
-                targets = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return structure.structureType == STRUCTURE_CONTAINER &&
-                            _.sum(structure.store) < structure.storeCapacity;
-                    }
-                });
-            }
+                filter: (structure) => {
+                    return structure.structureType == STRUCTURE_CONTAINER &&
+                        _.sum(structure.store) < structure.storeCapacity;
+                }
+            });
             
             if(targets.length > 0) {
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#029e00', opacity: 1}});
-                }else{
-                    creep.moveTo(Game.spawns['Spawn1'], {visualizePathStyle: {stroke: '#029e00', opacity: Memory.lineOpacity}});
                 }
             }
         }
