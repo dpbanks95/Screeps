@@ -50,8 +50,9 @@ var roleBuilder = {
                     }
                 });
             if(sources.length > 0){
-                if(creep.withdraw(sources[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE){
-                    creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#9e0000', opacity: Memory.lineOpacity}});
+                var closestContainer = creep.pos.findClosestByRange(sources);
+                if(creep.withdraw(closestContainer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE){
+                    creep.moveTo(closestContainer, {visualizePathStyle: {stroke: '#9e0000', opacity: Memory.lineOpacity}});
                 }
             }else if(creep.harvest(Game.getObjectById('5bbcac6f9099fc012e635719')) == ERR_NOT_IN_RANGE){
                 creep.moveTo(Game.flags['Source2'].pos, {visualizePathStyle: {stroke: '#9e0000', opacity: Memory.lineOpacity}});

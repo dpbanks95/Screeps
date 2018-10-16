@@ -30,14 +30,14 @@ module.exports.loop = function () {
     console.log('Available Energy: ' + availableEnergy);
     
     var size = 'small';
+    if(maxEnergy >= 450){
+        size = 'medium';
+    }
     if(maxEnergy >= 600){
         //size = 'large';
     }
-    if(maxEnergy >= 450){
-       size = 'medium';
-    }
     
-    var harvMax = 4;
+    var harvMax = 5;
     var upgMax = 5;
     var buildMax = 2;
     var refilMax = 3;
@@ -45,11 +45,11 @@ module.exports.loop = function () {
     
     //Auto spawn creeps
     if(!Memory.cleanup){
+        autoSpawn.run(1, 'fred', 'speedyBoi');
         autoSpawn.run(buildMax, 'builder', size);
         autoSpawn.run(upgMax, 'upgrader', size);
         autoSpawn.run(harvMax, 'harvester', size);
         autoSpawn.run(refilMax, 'refiller', size);
-        autoSpawn.run(1, 'fred', 'speedyBoi');
     }
     
     //Remove excess creeps with "Memory.cleanup = true;" in console
